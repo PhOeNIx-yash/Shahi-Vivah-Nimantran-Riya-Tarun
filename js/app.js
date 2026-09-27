@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     groomFullName: "Tarun Goyal",
     groomLineage: "Son of Smt. Meenakshi Goyal & Shri Rajendra Goyal",
     weddingDate: "2026-12-04T19:30:00",
-    grandparentsText: "Late Smt. Shanti Devi & Late Shri Ramswaroop Sharma",
-    parentsText: "Smt. Sunita & Shri Rajesh Sharma",
+    grandparentsText: "Late Smt. Shanti Devi & Late Shri Ramswaroop Garg",
+    parentsText: "Smt. Seema Garg & Shri Manoj Garg • Smt. Meenakshi Goyal & Shri Rajendra Goyal",
     kidsQuote: "“Mere pyare Bua ji ki shaadi mein Jalool-Jalool aana!”",
     kidsNames: "— Lots of love from Aarav, Vihaan & Pari",
     venueName: "Miraya Crown",
@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `📅 *Date:* ${shareDate}\n` +
       `📍 *Venue:* ${weddingData.venueName}, ${weddingData.venueCity}\n\n` +
       `Kindly view the complete interactive digital royal invitation with event itinerary, muhurat & timings here:\n${window.location.href}\n\n` +
-      `_With warm regards & blessings,_\n*Sharma & Verma Family*`;
+      `_With warm regards & blessings,_\n*Garg & Goyal Family*`;
 
     const encoded = encodeURIComponent(message);
     shareBtn.href = `https://api.whatsapp.com/send?text=${encoded}`;
