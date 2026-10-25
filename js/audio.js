@@ -51,6 +51,25 @@ class WeddingAudioPlayer {
     };
     document.addEventListener('click', unlockAudio, { once: true });
     document.addEventListener('touchstart', unlockAudio, { once: true });
+
+    // Stop audio immediately when user closes the website, switches tabs, minimizes, or locks phone
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        this.pause();
+      }
+    });
+
+    window.addEventListener('pagehide', () => {
+      this.pause();
+    });
+
+    window.addEventListener('beforeunload', () => {
+      this.pause();
+    });
+
+    window.addEventListener('unload', () => {
+      this.pause();
+    });
   }
 
   initSynth() {
@@ -145,12 +164,17 @@ class WeddingAudioPlayer {
 
   pause() {
     try {
-      if (!this.audioElement.paused) {
+      if (this.audioElement) {
         this.audioElement.pause();
       }
     } catch (err) {}
     if (this.synthActive) {
       this.stopIndianSynth();
+    }
+    if (this.audioCtx && this.audioCtx.state === 'running') {
+      try {
+        this.audioCtx.suspend();
+      } catch (e) {}
     }
     this.isPlaying = false;
     this.updateUI();

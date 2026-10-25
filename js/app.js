@@ -719,68 +719,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // =========================================================================
-  // 9. COUPLE PHOTO UPLOAD & LOCAL STORAGE MANAGER
-  // =========================================================================
-  function loadSavedCouplePhotos() {
-    const savedPhotos = localStorage.getItem('wedding_custom_photos');
-    if (savedPhotos) {
-      try {
-        const photos = JSON.parse(savedPhotos);
-        for (let i = 0; i < 4; i++) {
-          if (photos[`slide${i}`]) {
-            const img = document.getElementById(`scrollyImg${i}`);
-            if (img) img.src = photos[`slide${i}`];
-          }
-        }
-        if (photos.slide0) {
-          const hero = document.getElementById('heroCoupleBannerImg');
-          if (hero) hero.src = photos.slide0;
-        }
-      } catch (e) {
-        console.error("Error loading saved photos:", e);
-      }
-    }
-  }
-
-  // On refresh, ensure couple hero photo is always the pristine default
+  // Ensure couple hero photo is always the pristine official image
   const heroBanner = document.getElementById('heroCoupleBannerImg');
   if (heroBanner) heroBanner.src = 'assets/images/couple_hallway.jpg';
-
-  [0, 1, 2, 3].forEach(idx => {
-    const input = document.getElementById(`uploadPhoto${idx}`);
-    if (input) {
-      input.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const dataUrl = event.target.result;
-          const targetImg = document.getElementById(`scrollyImg${idx}`);
-          if (targetImg) targetImg.src = dataUrl;
-
-          if (idx === 0) {
-            const hero = document.getElementById('heroCoupleBannerImg');
-            if (hero) hero.src = dataUrl;
-          }
-
-          // Save to localStorage
-          try {
-            const curr = JSON.parse(localStorage.getItem('wedding_custom_photos') || '{}');
-            curr[`slide${idx}`] = dataUrl;
-            localStorage.setItem('wedding_custom_photos', JSON.stringify(curr));
-          } catch (storageErr) {
-            console.warn("Storage quota note:", storageErr);
-          }
-
-          petalShower.burst(25);
-          alert(`✨ Photo for Slide ${idx + 1} updated successfully!`);
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-  });
 
   // =========================================================================
   // 10. GLOBAL 3D CARD PARALLAX TILT & HOLOGRAPHIC GOLD SPECULAR GLARE
