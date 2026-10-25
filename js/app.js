@@ -4,9 +4,23 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Always reset scroll position and disable automatic browser scroll restoration on refresh
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+  document.body.style.overflow = 'hidden';
+
+  window.addEventListener('pageshow', (event) => {
+    window.scrollTo(0, 0);
+    if (event.persisted) {
+      window.location.reload();
+    }
+  });
+
   // Initialize Flower Petal Shower
   const petalShower = new PetalShower('petalCanvas');
-  
+
   // Initialize Auspicious Wedding Audio
   const audioPlayer = new WeddingAudioPlayer();
 
@@ -24,22 +38,29 @@ document.addEventListener('DOMContentLoaded', () => {
   // Default Wedding Data Model (Riya & Tarun)
   const defaultWeddingData = {
     brideName: "Riya",
-    brideFullName: "Riya Garg",
+    brideFullName: document.getElementById('brideNameDisplay')?.textContent.trim() || "Riya Garg",
     brideLineage: "Daughter of Smt. Seema Garg & Shri Manoj Garg",
     groomName: "Tarun",
-    groomFullName: "Tarun Goyal",
-    groomLineage: "Son of Smt. Meenakshi Goyal & Shri Rajendra Goyal",
-    weddingDate: "2026-12-04T19:30:00",
-    grandparentsText: "Late Smt. Shanti Devi & Late Shri Ramswaroop Garg",
-    parentsText: "Smt. Seema Garg & Shri Manoj Garg • Smt. Meenakshi Goyal & Shri Rajendra Goyal",
+    groomFullName: document.getElementById('groomNameDisplay')?.textContent.trim() || "Tarun Goyal",
+    groomLineage: "Son of Smt. Meenakshi Goyal & Shri Rajinder Goyal",
+    weddingDate: "2026-12-04T20:00:00",
+    grandparentsText: document.getElementById('grandparentsDisplay')?.textContent.trim() || "Smt. Kamla Devi & Late Shri Indersen Garg",
+    parentsText: document.getElementById('parentsDisplay')?.textContent.trim() || "Smt. Seema Garg & Shri Manoj Garg",
     kidsQuote: "“Mere pyare Bua ji ki shaadi mein Jalool-Jalool aana!”",
     kidsNames: "— Lots of love from Aarav, Vihaan & Pari",
-    venueName: "Miraya Crown",
-    venueCity: "Sector 16B, Greater Noida West",
+    venueName: "Miraya Crown Hotel & Banquets",
+    venueCity: "PKS Town Central, Ek Murti Chowk, Sector-16B, Greater Noida West",
     customMusicUrl: ""
   };
 
-  // Load Saved Data or Default
+  // Always reset to defaults on every refresh or page load
+  try {
+    localStorage.removeItem('wedding_invitation_custom_data');
+    localStorage.removeItem('wedding_custom_photos');
+    sessionStorage.removeItem('wedding_invitation_custom_data');
+    sessionStorage.removeItem('wedding_custom_photos');
+  } catch (e) {}
+
   const weddingData = { ...defaultWeddingData };
 
   // Apply Data to DOM
@@ -71,12 +92,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const bNameEl = document.getElementById('brideNameDisplay');
     if (bNameEl) bNameEl.textContent = brideFull;
     const bLineageEl = document.getElementById('brideLineageDisplay');
-    if (bLineageEl) bLineageEl.textContent = weddingData.brideLineage;
+    if (bLineageEl && weddingData.brideLineage && !bLineageEl.querySelector('.person-grandparents')) {
+      bLineageEl.textContent = weddingData.brideLineage;
+    }
 
     const gNameEl = document.getElementById('groomNameDisplay');
     if (gNameEl) gNameEl.textContent = groomFull;
     const gLineageEl = document.getElementById('groomLineageDisplay');
-    if (gLineageEl) gLineageEl.textContent = weddingData.groomLineage;
+    if (gLineageEl && weddingData.groomLineage && !gLineageEl.querySelector('.person-grandparents')) {
+      gLineageEl.textContent = weddingData.groomLineage;
+    }
 
     // Family
     const gpEl = document.getElementById('grandparentsDisplay');
@@ -115,10 +140,29 @@ document.addEventListener('DOMContentLoaded', () => {
   let hasEnteredPalace = false;
   let pendingPalaceEntry = null;
 
+  // Explicitly reset envelope and invitation view state on every load/refresh
+  if (envelopeScreen) {
+    envelopeScreen.style.display = '';
+    envelopeScreen.classList.remove('opened', 'envelope-opening');
+  }
+  if (mainContent) {
+    mainContent.classList.remove('website-revealed');
+  }
+  if (envelopeWrapper) {
+    envelopeWrapper.classList.remove('open-anim');
+  }
+  if (openInviteBtn) {
+    openInviteBtn.innerHTML = '<span>Tap to Open Shahi Nimantran</span> <span>🪷</span>';
+    openInviteBtn.style.opacity = '';
+    openInviteBtn.style.visibility = '';
+    openInviteBtn.style.pointerEvents = '';
+    openInviteBtn.style.transform = '';
+  }
+
   // Smooth 3D Mouse Parallax Tilt for Envelope (Zero-jerk lerp)
   if (envelopeWrapper) {
     envelopeWrapper.style.transform = 'rotateX(18deg) rotateY(-8deg) rotateZ(1.5deg)';
-    
+
     let envTargetX = 18, envTargetY = -8, envTargetScale = 1;
     let envCurrX = 18, envCurrY = -8, envCurrScale = 1;
     let isEnvTicking = false;
@@ -213,18 +257,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     hasEnteredPalace = true;
-    
+
     // Grand flower shower
     petalShower.burst(35, window.innerWidth / 2, window.innerHeight / 2);
-    
+
     // Cinematic camera fly-through into palace
     if (envelopeScreen) {
       envelopeScreen.classList.add('opened');
+      setTimeout(() => {
+        if (envelopeScreen && envelopeScreen.classList.contains('opened')) {
+          envelopeScreen.style.display = 'none';
+        }
+      }, 1200);
     }
     if (mainContent) {
       requestAnimationFrame(() => mainContent.classList.add('website-revealed'));
     }
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = '';
 
     // Ensure auspicious shehnai background music is playing
     if (!audioPlayer.isPlaying) {
@@ -240,10 +289,10 @@ document.addEventListener('DOMContentLoaded', () => {
       envelopeScreen.classList.add('envelope-opening');
       setTimeout(() => envelopeScreen.classList.remove('envelope-opening'), 3900);
     }
-    
+
     envelopeWrapper.style.transform = 'rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1.02)';
     envelopeWrapper.classList.add('open-anim');
-    
+
     // Celebratory rose & marigold petal burst
     const center = envelopeWrapper.getBoundingClientRect();
     petalShower.burst(38, center.left + center.width / 2, center.top + center.height / 2);
@@ -251,10 +300,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Auspicious Shehnai wedding audio
     audioPlayer.play();
 
-    // Update bottom button to enter
+    // Hide the bottom opening button so only the card's enter button is displayed
     if (openInviteBtn) {
-      openInviteBtn.innerHTML = '<span>पधारें • Enter Royal Celebration</span> <span>✨</span>';
-      openInviteBtn.onclick = enterPalace;
+      openInviteBtn.style.opacity = '0';
+      openInviteBtn.style.visibility = 'hidden';
+      openInviteBtn.style.pointerEvents = 'none';
+      openInviteBtn.style.transform = 'translateY(20px) scale(0.9)';
     }
 
     // Allow the light reveal to finish before the invitation enters automatically.
@@ -363,7 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // 4. Calendar Link Helper & .ics Download
   // =========================================================================
-  window.downloadIcs = function(title, description, location, startDateIso, endDateIso) {
+  window.downloadIcs = function (title, description, location, startDateIso, endDateIso) {
     const formatDate = (isoStr) => {
       return new Date(isoStr).toISOString().replace(/-|:|\.\d\d\d/g, "");
     };
@@ -407,7 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const message = `✨ *|| श्री गणेशाय नमः ||* ✨\n\n` +
-      `We cordially invite you and your family to celebrate the auspicious wedding ceremonies of our beloved sister *${weddingData.brideName}* with *${weddingData.groomName}*! 🪷\n\n` +
+      `We cordially invite you and your family to celebrate the auspicious wedding ceremonies of bride *${weddingData.brideName}* with groom *${weddingData.groomName}*! 🪷\n\n` +
       `📅 *Date:* ${shareDate}\n` +
       `📍 *Venue:* ${weddingData.venueName}, ${weddingData.venueCity}\n\n` +
       `Kindly view the complete interactive digital royal invitation with event itinerary, muhurat & timings here:\n${window.location.href}\n\n` +
@@ -446,7 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (saved) {
       try {
         return JSON.parse(saved);
-      } catch (e) {}
+      } catch (e) { }
     }
     return defaultBlessings;
   }
@@ -606,11 +657,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (resetCustomizerBtn) {
     resetCustomizerBtn.addEventListener('click', () => {
-      localStorage.removeItem('wedding_invitation_custom_data');
-      weddingData = { ...defaultWeddingData };
+      try {
+        localStorage.removeItem('wedding_invitation_custom_data');
+        localStorage.removeItem('wedding_custom_photos');
+        sessionStorage.removeItem('wedding_invitation_custom_data');
+        sessionStorage.removeItem('wedding_custom_photos');
+      } catch (e) {}
+      Object.assign(weddingData, defaultWeddingData);
       populateCustomizerInputs();
       applyWeddingData();
       updateCountdown();
+      const hero = document.getElementById('heroCoupleBannerImg');
+      if (hero) hero.src = 'assets/images/couple_hallway.jpg';
+      [0, 1, 2, 3].forEach(idx => {
+        const input = document.getElementById(`uploadPhoto${idx}`);
+        if (input) input.value = '';
+      });
       petalShower.burst(25);
       alert("✨ Details reset to default royal names (Riya & Tarun) & venue!");
     });
@@ -681,7 +743,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  loadSavedCouplePhotos();
+  // On refresh, ensure couple hero photo is always the pristine default
+  const heroBanner = document.getElementById('heroCoupleBannerImg');
+  if (heroBanner) heroBanner.src = 'assets/images/couple_hallway.jpg';
 
   [0, 1, 2, 3].forEach(idx => {
     const input = document.getElementById(`uploadPhoto${idx}`);
@@ -721,16 +785,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // 10. GLOBAL 3D CARD PARALLAX TILT & HOLOGRAPHIC GOLD SPECULAR GLARE
   // =========================================================================
-  // =========================================================================
-  // 10. GLOBAL 3D CARD PARALLAX TILT & HOLOGRAPHIC GOLD SPECULAR GLARE
-  // =========================================================================
+
   function init3DCardTilt() {
     // Only enable mouse tilt on non-touch devices with fine pointers
     if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
       const tiltTargets = document.querySelectorAll(
         '.ganesha-card, .couple-person-card, .event-card, .family-photo-card, .countdown-box, .couple-hero-banner, .collage-item'
       );
-      
+
       tiltTargets.forEach(card => {
         card.classList.add('has-3d-glare');
         let cardTargetRotX = 0, cardTargetRotY = 0;
@@ -741,14 +803,16 @@ document.addEventListener('DOMContentLoaded', () => {
           cardCurrRotX += (cardTargetRotX - cardCurrRotX) * 0.16;
           cardCurrRotY += (cardTargetRotY - cardCurrRotY) * 0.16;
 
-          const lift = Math.abs(cardCurrRotX) > 0.05 ? -3 : 0;
-          const cardScale = Math.abs(cardCurrRotX) > 0.05 || Math.abs(cardCurrRotY) > 0.05 ? 0.985 : 1;
-          card.style.transform = `perspective(1000px) rotateX(${cardCurrRotX.toFixed(2)}deg) rotateY(${cardCurrRotY.toFixed(2)}deg) translateY(${lift}px) scale(${cardScale})`;
+          const lift = Math.abs(cardCurrRotX) > 0.05 ? -2 : 0;
+          card.style.transform = `perspective(1000px) rotateX(${cardCurrRotX.toFixed(2)}deg) rotateY(${cardCurrRotY.toFixed(2)}deg) translateY(${lift}px)`;
 
           if (Math.abs(cardTargetRotX - cardCurrRotX) > 0.02 || Math.abs(cardTargetRotY - cardCurrRotY) > 0.02) {
             requestAnimationFrame(renderCardTilt);
           } else {
             isCardTicking = false;
+            if (cardTargetRotX === 0 && cardTargetRotY === 0) {
+              card.style.transform = '';
+            }
           }
         }
 
@@ -758,10 +822,10 @@ document.addEventListener('DOMContentLoaded', () => {
           const y = e.clientY - rect.top;
           const centerX = rect.width / 2;
           const centerY = rect.height / 2;
-          
+
           cardTargetRotX = -((y - centerY) / centerY) * 3.5;
           cardTargetRotY = ((x - centerX) / centerX) * 3.5;
-          
+
           card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
           card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
 
@@ -790,8 +854,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Monumental Lord Ganesha backdrop smoothly reacts to scroll depth
   // =========================================================================
   const ganeshaBgImg = document.getElementById('ganeshaBgImg');
+  const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches || window.innerWidth < 768;
 
-  if (ganeshaBgImg) {
+  if (ganeshaBgImg && !isTouchDevice) {
     let ticking = false;
 
     function renderGaneshaBgParallax() {
@@ -799,10 +864,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const progress = Math.min(1, Math.max(0, scrollY / 600));
 
       const bgParallax = (scrollY * 0.03).toFixed(1);
-      const bgScale = (1.05 + progress * 0.04).toFixed(3);
+      const bgScale = (1.04 + progress * 0.03).toFixed(3);
 
-      ganeshaBgImg.style.transform = `scale(${bgScale}) translateY(${bgParallax}px)`;
-
+      ganeshaBgImg.style.transform = `translate3d(0, ${bgParallax}px, 0) scale(${bgScale})`;
       ticking = false;
     }
 
@@ -850,31 +914,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       revealTargets.forEach(el => sectionObserver.observe(el));
 
-      // Text reveal observer with staggered delays
+      // Text reveal observer with instant/smooth reveals (zero mobile delay)
+      const isMobileScreen = window.innerWidth <= 768;
       const textObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            // Find all sibling text-reveals in the same parent for staggering
-            const parent = entry.target.closest('.couple-person-card, .wedding-announcement, .hero-section, .countdown-box, .ganesha-card');
-            if (parent) {
-              const siblings = parent.querySelectorAll('.name-reveal, .date-reveal, .title-reveal, .slide-reveal, .pop-reveal');
-              siblings.forEach((sib, idx) => {
-                setTimeout(() => {
-                  sib.classList.add('is-revealed');
-                }, idx * 150); // 150ms stagger between each element
-              });
-              // Unobserve all siblings since we revealed them
-              siblings.forEach(sib => obs.unobserve(sib));
-            } else {
-              // Standalone element
-              entry.target.classList.add('is-revealed');
-              obs.unobserve(entry.target);
-            }
+            entry.target.classList.add('is-revealed');
+            obs.unobserve(entry.target);
           }
         });
       }, {
-        threshold: 0.2,
-        rootMargin: '0px 0px -30px 0px'
+        threshold: isMobileScreen ? 0.04 : 0.1,
+        rootMargin: '0px 0px 20px 0px'
       });
 
       textRevealTargets.forEach(el => textObserver.observe(el));

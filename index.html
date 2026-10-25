@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0204">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Shahi Vivah Nimantran | Riya & Tarun - Royal North Hindu Wedding</title>
-  <meta name="description" content="With the divine blessings of Lord Ganesha, we cordially invite you to celebrate the royal wedding ceremonies of Riya Garg with Tarun Goyal.">
+  <meta name="description"
+    content="With the divine blessings of Lord Ganesha, we cordially invite you to celebrate the royal wedding ceremonies of Riya Garg with Tarun Goyal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg?v=2">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=19">
 </head>
+
 <body>
 
   <!-- Falling Rose & Marigold Petal Particle Canvas -->
@@ -52,7 +59,7 @@
             <div class="card-couple-calligraphy" id="envelopeCouple">Riya &amp; Tarun</div>
             <div class="card-date-line">Save the Auspicious Dates</div>
             <div class="card-sub-venue" id="envelopeDateDisplay">4th December 2026 • Greater Noida West</div>
-            
+
             <!-- Royal Enter Button on the Card itself -->
             <button type="button" class="btn-card-enter" id="cardEnterBtn" aria-label="Enter Royal Wedding">
               <span>पधारें • Enter Shahi Vivah</span>
@@ -93,7 +100,8 @@
        FLOATING CONTROLS (MUSIC, PETALS, CUSTOMIZER)
        ========================================================================= -->
   <div class="floating-controls">
-    <button class="float-btn music-btn" id="musicToggleBtn" title="Play / Pause Auspicious Music" aria-label="Toggle Music">
+    <button class="float-btn music-btn" id="musicToggleBtn" title="Play / Pause Auspicious Music"
+      aria-label="Toggle Music">
       🎵
     </button>
     <button class="float-btn" id="petalToggleBtn" title="Toggle Flower Shower" aria-label="Toggle Flower Shower">
@@ -112,7 +120,8 @@
        ========================================================================= -->
   <div class="ganesha-full-bg-container" id="ganeshaFullBg" aria-hidden="true">
     <div class="ganesha-full-bg-media">
-      <img src="assets/images/ganesha.jpg" alt="Bhagwan Shree Ganesha Sacred Golden Backdrop" class="ganesha-full-bg-img" id="ganeshaBgImg">
+      <img src="assets/images/ganesha.jpg" alt="Bhagwan Shree Ganesha Sacred Golden Backdrop"
+        class="ganesha-full-bg-img" id="ganeshaBgImg" decoding="async">
     </div>
     <div class="ganesha-full-bg-halo"></div>
     <div class="ganesha-full-bg-glow-pulse"></div>
@@ -154,12 +163,13 @@
         <div class="ganesha-stage-wrap">
           <div class="ganesha-halo-glow"></div>
           <div class="ganesha-image-wrapper">
-            <img src="assets/images/ganesha.jpg" alt="Bhagwan Shree Ganesh Golden Idol with Marigold and Roses" loading="eager">
+            <img src="assets/images/ganesha.jpg" alt="Bhagwan Shree Ganesh Golden Idol with Marigold and Roses"
+              loading="eager" decoding="async">
           </div>
         </div>
 
         <h2 class="shloka-sanskrit shloka-heading title-reveal">॥ ॐ श्री गणेशाय नमः ॥</h2>
-        
+
         <p class="shloka-sanskrit shloka-main">
           वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>
           निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
@@ -172,7 +182,8 @@
         </div>
 
         <p class="shloka-meaning slide-reveal">
-          “May Lord Ganesha, the embodiment of wisdom, auspicious beginnings, and divine grace, bless this sacred wedding ceremony and illuminate their life with everlasting love, joy, and prosperity.”
+          “May Lord Ganesha, the embodiment of wisdom, auspicious beginnings, and divine grace, bless this sacred
+          wedding ceremony and illuminate their life with everlasting love, joy, and prosperity.”
         </p>
       </div>
 
@@ -191,15 +202,20 @@
         <span>👑</span>
       </div>
 
-      <p class="wedding-invitation-lead slide-reveal">With the divine grace of the Almighty & blessings of beloved elders, we cordially invite you to celebrate the wedding of our beloved</p>
-      <div class="wedding-tagline slide-reveal">Sister & Dearest Groom</div>
+      <p class="wedding-invitation-lead slide-reveal">With the divine grace of the Almighty & blessings of beloved
+        elders, we cordially invite you to celebrate the wedding of our beloved</p>
+      <div class="wedding-tagline slide-reveal">Bride <span class="tagline-amp">&</span> Groom</div>
 
       <!-- Couple Jharokha Cards -->
       <div class="couple-showcase">
         <div class="couple-person-card has-3d-glare">
           <span class="person-role slide-reveal">सुपुत्री (The Bride)</span>
           <h3 class="person-name name-reveal" id="brideNameDisplay">Riya Garg</h3>
-          <p class="person-lineage slide-reveal" id="brideLineageDisplay">Daughter of Smt. Seema Garg & Shri Manoj Garg</p>
+          <div class="person-lineage slide-reveal" id="brideLineageDisplay">
+            <div>Daughter of Smt. Seema Garg & Shri Manoj Garg</div>
+            <div class="person-grandparents">Pautri (Granddaughter) of Smt. Kamla Devi & Lt. Shri Indersen Garg</div>
+            <div class="person-origin">📍 Greater Noida, Uttar Pradesh</div>
+          </div>
         </div>
 
         <div class="couple-ampersand pop-reveal">
@@ -210,13 +226,18 @@
         <div class="couple-person-card has-3d-glare">
           <span class="person-role slide-reveal">सुपुत्र (The Groom)</span>
           <h3 class="person-name name-reveal" id="groomNameDisplay">Tarun Goyal</h3>
-          <p class="person-lineage slide-reveal" id="groomLineageDisplay">Son of Smt. Meenakshi Goyal & Shri Rajendra Goyal</p>
+          <div class="person-lineage slide-reveal" id="groomLineageDisplay">
+            <div>Son of Smt. Meenakshi Goyal & Shri Rajinder Goyal</div>
+            <div class="person-grandparents">Pautra (Grandson) of Smt. Pushpa Devi & Shri Dharampal Goyal</div>
+            <div class="person-origin">📍 Bathinda, Punjab</div>
+          </div>
         </div>
       </div>
 
       <!-- Couple Master Portrait Banner -->
       <div class="couple-hero-banner has-3d-glare">
-        <img src="assets/images/couple_hallway.jpg" id="heroCoupleBannerImg" alt="The Couple in Royal Wedding Attire" loading="eager">
+        <img src="assets/images/couple_hallway.jpg" id="heroCoupleBannerImg" alt="The Couple in Royal Wedding Attire"
+          loading="eager" decoding="async">
         <div class="couple-hero-quote">
           “Two souls, two families, united by destiny and bound by sacred vows for seven lifetimes.”
         </div>
@@ -237,10 +258,12 @@
 
       <!-- Royal Mosaic Collage Grid -->
       <div class="royal-collage-grid">
-        <!-- 1. Throne Feature Card (Large Wide Hero) -->
-        <div class="collage-item collage-hero-wide has-3d-glare" data-src="assets/images/couple_throne.jpg" data-caption="राजसी मिलन • The Royal Union on Sacred Throne">
+        <!-- 1. Throne Feature Card (Large Wide Hero - Span 12) -->
+        <div class="collage-item collage-hero-throne has-3d-glare" data-src="assets/images/couple_throne.jpg"
+          data-caption="राजसी मिलन • The Royal Union on Sacred Throne">
           <div class="collage-img-wrap">
-            <img src="assets/images/couple_throne.jpg" alt="The Couple in Royal Attire on Throne" loading="lazy">
+            <img src="assets/images/couple_throne.jpg" alt="The Couple in Royal Attire on Throne" class="img-throne"
+              loading="lazy" decoding="async">
             <div class="collage-zoom-icon">🔍</div>
           </div>
           <div class="collage-info-ribbon">
@@ -249,10 +272,12 @@
           </div>
         </div>
 
-        <!-- 2. Hallway Card (Vertical Elegance) -->
-        <div class="collage-item collage-tall has-3d-glare" data-src="assets/images/couple_hallway.jpg" data-caption="रोमांटिक लम्हे • A Walk of Dreams Under Chandeliers">
+        <!-- 2. Hallway Card (Vertical Elegance - Span 4) -->
+        <div class="collage-item collage-portrait-card has-3d-glare" data-src="assets/images/couple_hallway.jpg"
+          data-caption="रोमांटिक लम्हे • A Walk of Dreams Under Chandeliers">
           <div class="collage-img-wrap">
-            <img src="assets/images/couple_hallway.jpg" alt="Romantic Hallway Portrait under Chandeliers" loading="lazy">
+            <img src="assets/images/couple_hallway.jpg" alt="Romantic Hallway Portrait under Chandeliers"
+              class="img-hallway" loading="lazy" decoding="async">
             <div class="collage-zoom-icon">🔍</div>
           </div>
           <div class="collage-info-ribbon">
@@ -261,10 +286,12 @@
           </div>
         </div>
 
-        <!-- 3. Dance & Eye Contact -->
-        <div class="collage-item has-3d-glare" data-src="assets/images/couple_dance.jpg" data-caption="इश्क की धुन • In Sync with Love">
+        <!-- 3. Dance & Eye Contact (Vertical Elegance - Span 4) -->
+        <div class="collage-item collage-portrait-card has-3d-glare" data-src="assets/images/couple_dance.jpg"
+          data-caption="इश्क की धुन • In Sync with Love">
           <div class="collage-img-wrap">
-            <img src="assets/images/couple_dance.jpg" alt="Intimate Couple Dance and Eye Contact" loading="lazy">
+            <img src="assets/images/couple_dance.jpg" alt="Intimate Couple Dance and Eye Contact" class="img-dance"
+              loading="lazy" decoding="async">
             <div class="collage-zoom-icon">🔍</div>
           </div>
           <div class="collage-info-ribbon">
@@ -273,39 +300,17 @@
           </div>
         </div>
 
-        <!-- 4. Formal Royal Portrait -->
-        <div class="collage-item has-3d-glare" data-src="assets/images/couple_regal.jpg" data-caption="शाही अंदाज़ • Royal Grace & Sacred Vows">
+        <!-- 4. Formal Royal Portrait (Vertical Elegance - Span 4) -->
+        <div class="collage-item collage-portrait-card has-3d-glare" data-src="assets/images/couple_regal.jpg"
+          data-caption="शाही अंदाज़ • Royal Grace & Sacred Vows">
           <div class="collage-img-wrap">
-            <img src="assets/images/couple_regal.jpg" alt="Formal Royal Wedding Portrait" loading="lazy">
+            <img src="assets/images/couple_regal.jpg" alt="Formal Royal Wedding Portrait" class="img-regal"
+              loading="lazy" decoding="async">
             <div class="collage-zoom-icon">🔍</div>
           </div>
           <div class="collage-info-ribbon">
             <span class="collage-hindi-title">शाही अंदाज़</span>
             <span class="collage-eng-desc">Royal Grace • Bound by Heritage & Harmony</span>
-          </div>
-        </div>
-
-        <!-- 5. Family Tilak & Blessings -->
-        <div class="collage-item has-3d-glare" data-src="assets/images/family_blessings.jpg" data-caption="बुजुर्गों का आशीर्वाद • Sacred Tilak & Elders' Divine Grace">
-          <div class="collage-img-wrap">
-            <img src="assets/images/family_blessings.jpg" alt="Sacred Tilak and Blessings with Family Elders" loading="lazy">
-            <div class="collage-zoom-icon">🔍</div>
-          </div>
-          <div class="collage-info-ribbon">
-            <span class="collage-hindi-title">बुजुर्गों का आशीर्वाद</span>
-            <span class="collage-eng-desc">Sacred Tilak & Elders' Divine Grace</span>
-          </div>
-        </div>
-
-        <!-- 6. Cordial Family Union (Full Width Banner) -->
-        <div class="collage-item collage-hero-wide has-3d-glare" data-src="assets/images/family_cordial.jpg" data-caption="परिवार का स्नेह • A Joyous Bond of Two Families">
-          <div class="collage-img-wrap">
-            <img src="assets/images/family_cordial.jpg" alt="Joyous Family Union with Parents and Brother" loading="lazy">
-            <div class="collage-zoom-icon">🔍</div>
-          </div>
-          <div class="collage-info-ribbon">
-            <span class="collage-hindi-title">परिवार का स्नेह</span>
-            <span class="collage-eng-desc">A Joyous Bond • Laughter, Love & Togetherness</span>
           </div>
         </div>
       </div>
@@ -366,154 +371,13 @@
 
       <div class="events-list">
 
-        <!-- 1. Rangbhari Mehendi -->
-        <article class="event-card">
-          <div class="event-media-container">
-            <img src="assets/images/mehendi.jpg" alt="Rangbhari Mehendi Henna Ceremony" loading="lazy">
-            <span class="event-badge-tag">Day 1 • Afternoon</span>
-          </div>
-          <div class="event-content">
-            <div class="event-header">
-              <div class="event-hindi-name">रंगभरी मेहंदी</div>
-              <h3 class="event-title">Rangbhari Mehendi</h3>
-              <p class="event-desc">
-                Intricate henna designs, sweet melodies of folk songs, and the fragrance of fresh jasmine to welcome the celebrations of love.
-              </p>
-            </div>
-
-            <div class="event-meta-grid">
-              <div class="event-meta-item">
-                <span class="meta-icon">📅</span>
-                <div>
-                  <div class="meta-text-title">Date & Time</div>
-                  <div class="meta-text-val">27th Nov 2026 • 02:00 PM</div>
-                </div>
-              </div>
-              <div class="event-meta-item">
-                <span class="meta-icon">📍</span>
-                <div>
-                  <div class="meta-text-title">Venue</div>
-                  <div class="meta-text-val">Miraya Crown</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-dress-code">
-              <span>🌿</span>
-              <span><strong>Dress Code:</strong> Sage Green, Mint & Floral Pastels</span>
-            </div>
-
-            <div class="event-actions">
-              <a href="https://maps.google.com/?q=Miraya+Crown+Sector+16B+Greater+Noida+West" target="_blank" rel="noopener" class="btn-royal-outline">
-                <span>📍</span> <span>View Map</span>
-              </a>
-              <button type="button" class="btn-royal-solid" onclick="downloadIcs('Rangbhari Mehendi - Riya & Tarun', 'Rangbhari Mehendi Ceremony', 'Miraya Crown, Sector 16B, Greater Noida West', '2026-11-27T14:00:00', '2026-11-27T18:00:00')">
-                <span>🗓️</span> <span>Add to Calendar</span>
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 2. Sangeet Sandhya -->
-        <article class="event-card">
-          <div class="event-media-container">
-            <img src="assets/images/sangeet.jpg" alt="Sangeet Sandhya Musical Celebration Night" loading="lazy">
-            <span class="event-badge-tag">Day 1 • Evening</span>
-          </div>
-          <div class="event-content">
-            <div class="event-header">
-              <div class="event-hindi-name">संगीत संध्या एवं कॉकटेल</div>
-              <h3 class="event-title">Sangeet & Glitz Night</h3>
-              <p class="event-desc">
-                An unforgettable evening of Punjabi dhol beats, breathtaking family dance performances, cocktails, and midnight celebrations.
-              </p>
-            </div>
-
-            <div class="event-meta-grid">
-              <div class="event-meta-item">
-                <span class="meta-icon">📅</span>
-                <div>
-                  <div class="meta-text-title">Date & Time</div>
-                  <div class="meta-text-val">27th Nov 2026 • 07:30 PM</div>
-                </div>
-              </div>
-              <div class="event-meta-item">
-                <span class="meta-icon">📍</span>
-                <div>
-                  <div class="meta-text-title">Venue</div>
-                  <div class="meta-text-val">Miraya Crown</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-dress-code">
-              <span>✨</span>
-              <span><strong>Dress Code:</strong> Glamorous Indo-Western & Evening Sparkle</span>
-            </div>
-
-            <div class="event-actions">
-              <a href="https://maps.google.com/?q=Miraya+Crown+Sector+16B+Greater+Noida+West" target="_blank" rel="noopener" class="btn-royal-outline">
-                <span>📍</span> <span>View Map</span>
-              </a>
-              <button type="button" class="btn-royal-solid" onclick="downloadIcs('Sangeet & Glitz Night - Riya & Tarun', 'Sangeet Sandhya Celebration', 'Miraya Crown, Sector 16B, Greater Noida West', '2026-11-27T19:30:00', '2026-11-28T01:00:00')">
-                <span>🗓️</span> <span>Add to Calendar</span>
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 3. Haldi Ki Rasam & Phoolon Ki Holi -->
-        <article class="event-card">
-          <div class="event-media-container">
-            <img src="assets/images/haldi.jpg" alt="Haldi Ki Rasam and Phoolon Ki Holi" loading="lazy">
-            <span class="event-badge-tag">Day 2 • Morning</span>
-          </div>
-          <div class="event-content">
-            <div class="event-header">
-              <div class="event-hindi-name">हल्दी की रस्म एवं फूलों की होली</div>
-              <h3 class="event-title">Haldi Rasam & Phoolon Ki Holi</h3>
-              <p class="event-desc">
-                An auspicious turmeric blessing ceremony filled with fragrant marigold flower shower, holy ubtan, and pure joy.
-              </p>
-            </div>
-
-            <div class="event-meta-grid">
-              <div class="event-meta-item">
-                <span class="meta-icon">📅</span>
-                <div>
-                  <div class="meta-text-title">Date & Time</div>
-                  <div class="meta-text-val">28th Nov 2026 • 10:00 AM</div>
-                </div>
-              </div>
-              <div class="event-meta-item">
-                <span class="meta-icon">📍</span>
-                <div>
-                  <div class="meta-text-title">Venue</div>
-                  <div class="meta-text-val">Miraya Crown</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-dress-code">
-              <span>🌻</span>
-              <span><strong>Dress Code:</strong> Sunshine Haldi Yellow & Mustard</span>
-            </div>
-
-            <div class="event-actions">
-              <a href="https://maps.google.com/?q=Miraya+Crown+Sector+16B+Greater+Noida+West" target="_blank" rel="noopener" class="btn-royal-outline">
-                <span>📍</span> <span>View Map</span>
-              </a>
-              <button type="button" class="btn-royal-solid" onclick="downloadIcs('Haldi Rasam & Phoolon Ki Holi - Riya & Tarun', 'Haldi Rasam & Flower Shower', 'Miraya Crown, Sector 16B, Greater Noida West', '2026-11-28T10:00:00', '2026-11-28T13:00:00')">
-                <span>🗓️</span> <span>Add to Calendar</span>
-              </button>
-            </div>
-          </div>
-        </article>
+        <!-- Shubh Vivah, Varmala & Saat Phere (The Main Wedding Ceremony) -->
 
         <!-- 4. Baraat Agaman, Varmala & Saat Phere -->
         <article class="event-card" style="border: 2px solid var(--gold-primary);">
           <div class="event-media-container">
-            <img src="assets/images/phere.jpg" alt="Saat Phere sacred rituals around holy Agni" loading="lazy">
+            <img src="assets/images/phere.jpg" alt="Saat Phere sacred rituals around holy Agni" loading="lazy"
+              decoding="async">
             <span class="event-badge-tag" style="background: var(--royal-maroon);">The Main Wedding Day</span>
           </div>
           <div class="event-content">
@@ -521,7 +385,8 @@
               <div class="event-hindi-name">शुभ विवाह, वरमाला एवं सात फेरे</div>
               <h3 class="event-title">Shubh Vivah & Saat Phere</h3>
               <p class="event-desc">
-                The grand Baraat arrival, royal Varmala exchange under floral shower, sacred Kanyadaan, and the 7 eternal vows around the holy Agni.
+                The grand Baraat arrival, royal Varmala exchange under floral shower, sacred Kanyadaan, and the 7
+                eternal vows around the holy Agni.
               </p>
             </div>
 
@@ -529,29 +394,59 @@
               <div class="event-meta-item">
                 <span class="meta-icon">📅</span>
                 <div>
-                  <div class="meta-text-title">Auspicious Muhurat</div>
-                  <div class="meta-text-val">4th Dec 2026 • 07:00 PM Onwards</div>
+                  <div class="meta-text-title">Auspicious Date</div>
+                  <div class="meta-text-val">Friday, 4th December 2026</div>
                 </div>
               </div>
               <div class="event-meta-item">
                 <span class="meta-icon">📍</span>
                 <div>
-                  <div class="meta-text-title">Royal Mandap</div>
-                  <div class="meta-text-val">The Grand Palace Mandap Lawns</div>
+                  <div class="meta-text-title">Wedding Venue</div>
+                  <div class="meta-text-val">Miraya Crown Hotel & Banquets</div>
+                  <div class="event-venue-sub">PKS Town Central, Ek Murti Chowk, Sector-16B Rd, Greater Noida West, U.P. - 201308</div>
                 </div>
               </div>
             </div>
 
-            <div class="event-dress-code">
-              <span>👑</span>
-              <span><strong>Dress Code:</strong> Royal Traditional & Heritage Silk</span>
+            <!-- Auspicious Ceremony Timeline & Program -->
+            <div class="ceremony-schedule-grid">
+              <div class="schedule-pill">
+                <span class="schedule-icon">🥁</span>
+                <div class="schedule-details">
+                  <div class="schedule-title">बारात स्वागत (Baraat Swagat)</div>
+                  <div class="schedule-time">8:00 PM</div>
+                </div>
+              </div>
+              <div class="schedule-pill">
+                <span class="schedule-icon">🍽️</span>
+                <div class="schedule-details">
+                  <div class="schedule-title">प्रीतिभोज (Dinner)</div>
+                  <div class="schedule-time">8:00 PM Onwards</div>
+                </div>
+              </div>
+              <div class="schedule-pill">
+                <span class="schedule-icon">🌸</span>
+                <div class="schedule-details">
+                  <div class="schedule-title">जयमाला / वरमाला (Varmala)</div>
+                  <div class="schedule-time">9:00 PM</div>
+                </div>
+              </div>
+              <div class="schedule-pill">
+                <span class="schedule-icon">🌙</span>
+                <div class="schedule-details">
+                  <div class="schedule-title">विदाई (Vidai)</div>
+                  <div class="schedule-time">तारों की छांव में (Tarron ki chhaon mein)</div>
+                </div>
+              </div>
             </div>
 
             <div class="event-actions">
-              <a href="https://maps.google.com/?q=Miraya+Crown+Sector+16B+Greater+Noida+West" target="_blank" rel="noopener" class="btn-royal-outline">
-                <span>📍</span> <span>View Map</span>
+              <a href="https://maps.google.com/?q=Miraya+Crown+Hotel+Banquets+PKS+Town+Central+Ek+Murti+Chowk+Sector+16B+Greater+Noida+West" target="_blank"
+                rel="noopener" class="btn-royal-outline">
+                <span>📍</span> <span>View Location on Map</span>
               </a>
-              <button type="button" class="btn-royal-solid" onclick="downloadIcs('Shubh Vivah & Saat Phere - Riya & Tarun', 'Sacred Wedding Ceremony & Saat Phere', 'Miraya Crown, Sector 16B, Greater Noida West', '2026-12-04T19:00:00', '2026-12-05T02:00:00')">
+              <button type="button" class="btn-royal-solid"
+                onclick="downloadIcs('Shubh Vivah & Saat Phere - Riya & Tarun', 'Sacred Wedding Ceremony & Saat Phere', 'Miraya Crown Hotel & Banquets, PKS Town Central, Greater Noida West', '2026-12-04T20:00:00', '2026-12-05T04:00:00')">
                 <span>🗓️</span> <span>Add to Calendar</span>
               </button>
             </div>
@@ -576,43 +471,40 @@
         <div class="family-blessings-block">
           <p class="family-lead-text">With the heavenly blessings of our beloved elders:</p>
           <div class="grandparents-names" id="grandparentsDisplay">
-            Late Smt. Shanti Devi & Late Shri Ramswaroop Garg
+            Smt. Kamla Devi & Late Shri Indersen Garg
           </div>
 
           <p class="family-lead-text">Cordially and lovingly invited by:</p>
           <div class="parents-names" id="parentsDisplay">
-            Smt. Seema Garg & Shri Manoj Garg • Smt. Meenakshi Goyal & Shri Rajendra Goyal
+            Smt. Seema Garg & Shri Manoj Garg
           </div>
         </div>
 
-        <!-- Parivaar Darshan Real Family Photo Gallery -->
-        <div class="family-photos-grid">
-          <div class="family-photo-card">
-            <img src="assets/images/family_blessings.jpg" alt="Auspicious Tilak and Blessings with Family Elders" loading="lazy">
-            <div class="family-photo-caption">आशीर्वाद • Elders' Sacred Blessings & Tilak</div>
-          </div>
-          <div class="family-photo-card">
-            <img src="assets/images/family_cordial.jpg" alt="Joyous Family Union with Parents and Brother" loading="lazy">
-            <div class="family-photo-caption">स्नेह मिलन • A Joyous Bond of Family</div>
-          </div>
-        </div>
 
         <div class="family-cordial-grid">
           <div>
             <div class="cordial-title">दर्शनाभिलाषी (Darshnabhilashi)</div>
             <p class="cordial-names">
-              Shri Manoj & Smt. Rekha Garg<br>
-              Shri Vivek & Smt. Anupama Goyal<br>
-              All Uncles, Aunts & Extended Garg-Goyal Family
+              Shri Manoj Garg (Father) — <a href="tel:9810226664" class="phone-link">9810226664</a><br>
+              Shri Mahesh Garg (Tau ji)<br>
+              All Uncles, Aunts & Extended Garg Family
             </p>
           </div>
           <div>
             <div class="cordial-title">स्वागताकांक्षी (Swagatakankshi)</div>
             <p class="cordial-names">
-              Aditya Garg (Brother)<br>
-              Pooja & Karan Goyal<br>
+              Yash Garg (Brother) — <a href="tel:8851132443" class="phone-link">8851132443</a><br>
+              Maalvika Garg (Sister)<br>
               And all loving Brothers, Sisters & Friends
             </p>
+          </div>
+        </div>
+
+        <!-- Bride Family Residence Address -->
+        <div style="text-align: center;">
+          <div class="family-residence-badge">
+            <span>🏡</span>
+            <span><strong>Residence:</strong> Strategic Royal Court, Sector-16, Greater Noida West, U.P.</span>
           </div>
         </div>
       </div>
@@ -632,7 +524,8 @@
       <div class="rsvp-wrapper">
         <!-- RSVP Form -->
         <div class="rsvp-form-card">
-          <h3 style="font-family: var(--font-serif-royal); font-size: 1.25rem; color: var(--royal-maroon); margin-bottom: 1.2rem;">
+          <h3
+            style="font-family: var(--font-serif-royal); font-size: 1.25rem; color: var(--royal-maroon); margin-bottom: 1.2rem;">
             Will You Grace Us With Your Presence?
           </h3>
 
@@ -669,14 +562,17 @@
 
             <div class="form-group">
               <label for="guestWishes" class="form-label">Heartfelt Blessings & Wishes</label>
-              <textarea id="guestWishes" class="form-textarea" placeholder="Write your warm wishes for the bride & groom..." required></textarea>
+              <textarea id="guestWishes" class="form-textarea"
+                placeholder="Write your warm wishes for the bride & groom..." required></textarea>
             </div>
 
             <button type="submit" class="btn-submit-rsvp" id="submitRsvpBtn">
               <span>Send Blessings & Confirm RSVP 🪷</span>
             </button>
 
-            <div id="rsvpStatusMsg" style="display: none; margin-top: 1rem; color: #2e7d32; font-size: 0.85rem; font-weight: 600; text-align: center;"></div>
+            <div id="rsvpStatusMsg"
+              style="display: none; margin-top: 1rem; color: #2e7d32; font-size: 0.85rem; font-weight: 600; text-align: center;">
+            </div>
           </form>
         </div>
 
@@ -700,7 +596,8 @@
         <h3 class="share-card-title">
           Share This Shahi Nimantran
         </h3>
-        <p style="font-family: var(--font-serif-sub); font-size: 1.1rem; color: var(--text-secondary); max-width: 480px; margin: 0 auto;">
+        <p
+          style="font-family: var(--font-serif-sub); font-size: 1.1rem; color: var(--text-secondary); max-width: 480px; margin: 0 auto;">
           Invite relatives, friends, and family via WhatsApp with an auspicious pre-composed message and link.
         </p>
 
@@ -716,7 +613,7 @@
       <div class="footer-shloka">
         ॥ मंगलम् भगवान विष्णुः मंगलम् गरुड़ध्वजः । मंगलम् पुण्डरीकाक्षः मंगलाय तनो हरिः ॥
       </div>
-      <p>Created with heartfelt love for our dearest sister’s wedding celebration.</p>
+      <p>Created with heartfelt love for this royal wedding celebration.</p>
       <p style="margin-top: 0.4rem; font-size: 0.75rem; color: var(--gold-dark);">
         ✨ Modern Royal Pastel Hindu Wedding Invitation Experience
       </p>
@@ -725,7 +622,7 @@
   </main>
 
   <!-- =========================================================================
-       IN-APP PERSONALIZATION DRAWER (SISTER'S CUSTOMIZER)
+       IN-APP PERSONALIZATION DRAWER (WEDDING DETAILS CUSTOMIZER)
        ========================================================================= -->
   <div class="customizer-backdrop" id="customizerBackdrop" hidden></div>
 
@@ -737,12 +634,13 @@
 
     <div class="drawer-content">
       <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">
-        Easily update your sister's name, groom's name, event dates, venues, and family names. Everything updates live and saves to your browser!
+        Easily update bride's name, groom's name, event dates, venues, and family names. Everything updates live
+        and saves to your browser!
       </p>
 
       <form id="customizerForm">
         <!-- Bride Details -->
-        <div class="drawer-section-title">Bride (Sister) Details</div>
+        <div class="drawer-section-title">Bride Details</div>
         <div class="form-group">
           <label class="form-label" for="inputBrideName">Bride First Name</label>
           <input type="text" id="inputBrideName" class="form-input">
@@ -849,9 +747,10 @@
   </aside>
 
   <!-- Scripts -->
-  <script src="js/petals.js"></script>
-  <script src="js/audio.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/petals.js?v=19"></script>
+  <script src="js/audio.js?v=19"></script>
+  <script src="js/app.js?v=19"></script>
 
 </body>
+
 </html>

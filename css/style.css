@@ -3,16 +3,16 @@
    Palette: Deep Midnight Burgundy, Obsidian Velvet, 24K Gold Foil, Radiant Ivory
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Rozha+One&family=Yatra+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Rozha+One&family=Yatra+One&display=swap');
 
 :root {
   /* Royal Dark Velvet Color Tokens */
   --bg-dark: #0A0204;
   --bg-velvet: #140308;
   --bg-velvet-light: #20060D;
-  --bg-card: rgba(24, 4, 10, 0.82);
-  --bg-card-alt: rgba(32, 6, 14, 0.80);
-  --bg-card-inner: rgba(18, 3, 7, 0.85);
+  --bg-card: rgba(20, 3, 7, 0.93);
+  --bg-card-alt: rgba(26, 4, 11, 0.92);
+  --bg-card-inner: rgba(14, 2, 5, 0.92);
   
   /* 24K Gold Luxury Accents */
   --gold-primary: #D4AF37;
@@ -39,12 +39,12 @@
   --vivah-red: #E74C3C;
   --vivah-bg: rgba(65, 10, 20, 0.7);
   
-  /* Text Colors (Dark Mode Optimized) */
-  --text-primary: #FFF8EE;
-  --text-secondary: #E8D7CA;
-  --text-muted: #B8A295;
-  --text-gold: #F7D070;
-  --text-maroon: #FCE7A6;
+  /* Text Colors (High Contrast - Crystal Clear Readability) */
+  --text-primary: #FFFFFF;
+  --text-secondary: #F4EAE2;
+  --text-muted: #D8C7BC;
+  --text-gold: #FCE7A6;
+  --text-maroon: #FFF0D4;
 
   /* Typography */
   --font-serif-royal: 'Cinzel Decorative', Georgia, serif;
@@ -80,8 +80,13 @@ html {
   background-color: var(--bg-dark);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
   scrollbar-width: thin;
   scrollbar-color: #D4AF37 #0A0204;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Global Custom Royal Scrollbar */
@@ -107,22 +112,33 @@ html {
 body {
   font-family: var(--font-sans);
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
   line-height: 1.6;
   background-color: var(--bg-dark);
   position: relative;
   min-height: 100vh;
+  -webkit-overflow-scrolling: touch;
 }
 
 body:has(.envelope-screen:not(.opened)) {
   overflow: hidden;
 }
 
-/* Keep long invitation sections cheap until they approach the viewport. */
-.events-section,
-.family-section,
+/* Accurate section intrinsic sizes prevent layout shifts and scroll jumps */
+.events-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 620px;
+}
+
+.family-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 650px;
+}
+
 .rsvp-section {
   content-visibility: auto;
-  contain-intrinsic-size: 900px;
+  contain-intrinsic-size: auto 900px;
 }
 
 /* ==========================================================================
@@ -228,7 +244,7 @@ body:has(.envelope-screen:not(.opened)) {
   .ganesha-full-bg-media,
   .ganesha-full-bg-halo,
   .ganesha-full-bg-glow-pulse {
-    animation: none;
+    animation: none !important;
   }
 
   .ganesha-full-bg-img {
@@ -236,13 +252,14 @@ body:has(.envelope-screen:not(.opened)) {
   }
 
   .ganesha-full-bg-halo {
-    filter: blur(35px);
+    filter: blur(20px);
+    opacity: 0.5;
   }
 
   .family-card,
   .event-card {
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
   }
 
   .has-3d-glare::after {
@@ -289,9 +306,13 @@ body:has(.envelope-screen:not(.opened)) {
 
 .envelope-screen.opened {
   opacity: 0;
-  transform: scale(1.22);
+  transform: scale(1.15);
   visibility: hidden;
   pointer-events: none;
+}
+
+.envelope-screen.opened * {
+  animation: none !important;
 }
 
 /* Palace Hanging Diyas & Lanterns Ambiance */
@@ -650,7 +671,7 @@ body:has(.envelope-screen:not(.opened)) {
 .card-foil-border {
   position: absolute;
   inset: 6px;
-  border: 1px dashed var(--gold-dark);
+  border: 1px solid rgba(212, 175, 55, 0.45);
   border-radius: 8px;
   pointer-events: none;
 }
@@ -793,7 +814,7 @@ body:has(.envelope-screen:not(.opened)) {
   position: absolute;
   inset: 5px;
   border-radius: 50%;
-  border: 1px dashed rgba(255, 240, 180, 0.9);
+  border: 1px solid rgba(255, 240, 180, 0.6);
   pointer-events: none;
 }
 
@@ -865,7 +886,26 @@ body:has(.envelope-screen:not(.opened)) {
   box-shadow: 0 12px 35px rgba(212, 175, 55, 0.7), 0 0 25px rgba(252, 246, 186, 0.8);
 }
 
+.envelope-screen.envelope-opening .envelope-tap-cta,
+.envelope-screen:has(.open-anim) .envelope-tap-cta {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(20px) scale(0.9) !important;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease !important;
+}
+
 @media (max-width: 600px) {
+  .envelope-header-wrap {
+    margin-bottom: 1.2rem;
+  }
+  .envelope-subtext {
+    font-size: clamp(1.25rem, 5.5vw, 1.55rem);
+    letter-spacing: 1px;
+  }
+  .envelope-sub-tagline {
+    font-size: clamp(0.85rem, 3.4vw, 1rem);
+  }
   .envelope-wrapper {
     width: 94vw;
     height: calc(94vw * 0.68);
@@ -887,7 +927,7 @@ body:has(.envelope-screen:not(.opened)) {
   .card-couple-calligraphy {
     width: 100%;
     min-width: 0;
-    font-size: clamp(1.8rem, 9vw, 2.2rem);
+    font-size: clamp(1.75rem, 8.5vw, 2.2rem);
     line-height: 1.1;
     white-space: normal;
     overflow: visible;
@@ -901,18 +941,26 @@ body:has(.envelope-screen:not(.opened)) {
     text-shadow: 0 1px 2px rgba(122, 18, 38, 0.2);
   }
   .card-shahi-heading {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
   }
   .card-date-line {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
   }
   .card-sub-venue {
     font-size: 0.72rem;
+    line-height: 1.3;
   }
   .btn-card-enter {
-    margin-top: 0.6rem;
-    padding: 0.5rem 1.4rem;
+    margin-top: 0.55rem;
+    padding: 0.5rem 1.3rem;
     font-size: 0.75rem;
+  }
+  .envelope-tap-cta {
+    padding: 0.8rem 1.6rem;
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+    max-width: 92vw;
   }
 }
 
@@ -954,12 +1002,20 @@ body:has(.envelope-screen:not(.opened)) {
    ========================================================================== */
 .floating-controls {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: max(24px, env(safe-area-inset-bottom, 24px));
+  right: max(24px, env(safe-area-inset-right, 24px));
   display: flex;
   flex-direction: column;
   gap: 12px;
   z-index: 900;
+}
+
+@media (max-width: 600px) {
+  .floating-controls {
+    bottom: max(16px, env(safe-area-inset-bottom, 16px));
+    right: max(14px, env(safe-area-inset-right, 14px));
+    gap: 8px;
+  }
 }
 
 .float-btn {
@@ -976,8 +1032,17 @@ body:has(.envelope-screen:not(.opened)) {
   cursor: pointer;
   box-shadow: var(--shadow-md);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  touch-action: manipulation;
+}
+
+@media (max-width: 600px) {
+  .float-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 1.05rem;
+  }
 }
 
 .float-btn:hover {
@@ -1139,8 +1204,8 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   content: "";
   position: absolute;
   inset: -3px 20px;
-  border-top: 2px dashed rgba(255, 235, 170, 0.9);
-  border-bottom: 2px dashed rgba(255, 235, 170, 0.9);
+  border-top: 1px solid rgba(255, 235, 170, 0.7);
+  border-bottom: 1px solid rgba(255, 235, 170, 0.7);
 }
 
 .toran-flower-chains {
@@ -1172,9 +1237,8 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
 
 /* Royal Ganesha Temple Pavilion Card - 80% Screen Monumental Darshan */
 .ganesha-card {
-  width: 80vw;
+  width: 100%;
   max-width: 940px;
-  min-width: 320px;
   margin: 0 auto 3rem;
   background: var(--bg-card);
   border-radius: var(--radius-arch);
@@ -1200,7 +1264,7 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   right: 8px;
   bottom: 8px;
   border-radius: 152px 152px 14px 14px;
-  border: 1px dashed rgba(212, 175, 55, 0.55);
+  border: 1px solid rgba(212, 175, 55, 0.35);
   pointer-events: none;
 }
 
@@ -1280,7 +1344,8 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   position: absolute;
   inset: -8px;
   border-radius: 50%;
-  border: 2px dashed rgba(255, 235, 170, 0.8);
+  border: 1px solid rgba(255, 235, 170, 0.7);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
   animation: spinSlow 35s linear infinite;
   pointer-events: none;
 }
@@ -1390,14 +1455,14 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
 .wedding-announcement {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  border: 1.5px solid var(--gold-primary);
+  border: 1px solid var(--gold-primary);
   box-shadow: var(--shadow-lg), var(--shadow-inner-gold);
   padding: 3.2rem 2.2rem;
   margin-bottom: 3.5rem;
   position: relative;
   text-align: center;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .wedding-invitation-lead {
@@ -1415,7 +1480,13 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   font-size: 2.6rem;
   color: var(--gold-light);
   margin-bottom: 1.8rem;
-  text-shadow: 0 0 20px rgba(212, 175, 55, 0.5), 0 3px 10px rgba(0,0,0,0.7);
+  word-spacing: 0.35em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 0 8px rgba(212, 175, 55, 0.35);
+}
+
+.wedding-tagline .tagline-amp {
+  display: inline-block;
+  margin: 0 0.85rem;
 }
 
 /* Couple Cards in Royal Jharokha Arch */
@@ -1438,7 +1509,7 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   background: var(--bg-card-inner);
   border-radius: var(--radius-arch);
   padding: 2.2rem 1.6rem 1.6rem;
-  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.4);
   box-shadow: var(--shadow-md), inset 0 0 20px rgba(0, 0, 0, 0.7);
   position: relative;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -1457,7 +1528,7 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   right: 6px;
   bottom: 6px;
   border-radius: 154px 154px 12px 12px;
-  border: 1px dashed rgba(212, 175, 55, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.3);
   pointer-events: none;
 }
 
@@ -1610,77 +1681,86 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   z-index: 5;
 }
 
-/* Inner Dashed Gold Border */
+/* Inner Solid Gold Border */
 .collage-item::before {
   content: "";
   position: absolute;
   inset: 6px;
-  border: 1px dashed rgba(212, 175, 55, 0.5);
+  border: 1px solid rgba(212, 175, 55, 0.38);
   border-radius: 10px;
   pointer-events: none;
   z-index: 4;
 }
 
-/* Grid Layout Spans */
-.collage-hero-wide {
-  grid-column: span 8;
-  height: 440px;
+/* Grid Layout Spans (1 Grand Hero + 3 Triptych Portraits) */
+.royal-collage-grid > .collage-item:nth-child(1),
+.royal-collage-grid > .collage-hero-throne {
+  grid-column: 1 / -1 !important;
+  width: 100%;
+  height: clamp(360px, 46vw, 500px);
 }
 
-.collage-tall {
-  grid-column: span 4;
-  height: 440px;
+.royal-collage-grid > .collage-item:nth-child(1) img,
+.collage-hero-throne .img-throne {
+  object-position: center 30% !important;
 }
 
-.collage-item:nth-child(3),
-.collage-item:nth-child(4),
-.collage-item:nth-child(5) {
-  grid-column: span 4;
-  height: 380px;
+.royal-collage-grid > .collage-item:nth-child(2),
+.royal-collage-grid > .collage-item:nth-child(3),
+.royal-collage-grid > .collage-item:nth-child(4),
+.royal-collage-grid > .collage-portrait-card {
+  grid-column: span 4 !important;
+  width: 100%;
+  height: clamp(400px, 48vw, 510px);
 }
 
-.collage-item:nth-child(6) {
-  grid-column: span 12;
-  height: 400px;
+.royal-collage-grid > .collage-item:nth-child(2) img,
+.img-hallway {
+  object-position: center 35% !important;
+}
+
+.royal-collage-grid > .collage-item:nth-child(3) img,
+.img-dance {
+  object-position: center 25% !important;
+}
+
+.royal-collage-grid > .collage-item:nth-child(4) img,
+.img-regal {
+  object-position: center 20% !important;
 }
 
 @media (max-width: 900px) {
-  .collage-hero-wide {
-    grid-column: span 12;
-    height: 360px;
+  .royal-collage-grid > .collage-item:nth-child(1),
+  .royal-collage-grid > .collage-hero-throne {
+    grid-column: 1 / -1 !important;
+    height: 380px;
   }
-  .collage-tall {
-    grid-column: span 12;
+  .royal-collage-grid > .collage-item:nth-child(2),
+  .royal-collage-grid > .collage-item:nth-child(3) {
+    grid-column: span 6 !important;
+    height: 380px;
+  }
+  .royal-collage-grid > .collage-item:nth-child(4) {
+    grid-column: 1 / -1 !important;
     height: 420px;
-  }
-  .collage-item:nth-child(3),
-  .collage-item:nth-child(4),
-  .collage-item:nth-child(5) {
-    grid-column: span 6;
-    height: 320px;
-  }
-  .collage-item:nth-child(5) {
-    grid-column: span 12;
-  }
-  .collage-item:nth-child(6) {
-    grid-column: span 12;
-    height: 340px;
   }
 }
 
 @media (max-width: 600px) {
   .royal-collage-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     gap: 1.2rem;
   }
-  .collage-hero-wide,
-  .collage-tall,
-  .collage-item:nth-child(3),
-  .collage-item:nth-child(4),
-  .collage-item:nth-child(5),
-  .collage-item:nth-child(6) {
-    grid-column: span 1;
-    height: 300px;
+  .royal-collage-grid > .collage-item:nth-child(1),
+  .royal-collage-grid > .collage-hero-throne {
+    grid-column: 1 / -1 !important;
+    height: 275px;
+  }
+  .royal-collage-grid > .collage-item:nth-child(2),
+  .royal-collage-grid > .collage-item:nth-child(3),
+  .royal-collage-grid > .collage-item:nth-child(4) {
+    grid-column: 1 / -1 !important;
+    height: 390px;
   }
 }
 
@@ -1863,25 +1943,27 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
    3. COUNTDOWN TO SHUBH MUHURAT
    ========================================================================== */
 .countdown-section {
-  margin-bottom: 4.5rem;
+  margin-bottom: 4rem;
   text-align: center;
+  width: 100%;
 }
 
 .countdown-box {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  padding: 2.8rem 1.8rem;
-  border: 1.5px solid var(--gold-primary);
+  padding: clamp(2rem, 3.5vw, 2.8rem) clamp(1rem, 2.5vw, 2rem);
+  border: 1px solid var(--gold-primary);
   box-shadow: var(--shadow-lg), var(--shadow-inner-gold);
-  max-width: 760px;
+  width: 100%;
   margin: 0 auto;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .countdown-date-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.6rem;
   font-family: var(--font-sans);
   font-size: 0.88rem;
@@ -1892,14 +1974,16 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   background: rgba(133, 28, 49, 0.5);
   padding: 8px 24px;
   border-radius: var(--radius-full);
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem auto;
   border: 1px solid var(--gold-primary);
+  max-width: 100%;
 }
 
 .countdown-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.2rem;
+  gap: clamp(0.6rem, 1.5vw, 1.2rem);
+  width: 100%;
 }
 
 @media (max-width: 580px) {
@@ -1916,6 +2000,11 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .countdown-item::before {
@@ -1929,13 +2018,21 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
 }
 
 .countdown-number {
-  font-family: var(--font-serif-royal);
+  font-family: 'Cinzel', var(--font-serif-royal);
+  font-variant-numeric: tabular-nums lining-nums;
+  -webkit-font-feature-settings: "tnum" 1, "lnum" 1;
+  font-feature-settings: "tnum" 1, "lnum" 1;
   font-size: 2.6rem;
   font-weight: 700;
   color: var(--gold-light);
-  line-height: 1;
+  line-height: 1.1;
   margin-bottom: 0.4rem;
   text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
 }
 
 @media (max-width: 580px) {
@@ -1951,6 +2048,9 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--text-muted);
+  display: block;
+  text-align: center;
+  width: 100%;
 }
 
 /* ==========================================================================
@@ -1969,15 +2069,15 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
 .event-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.4);
   box-shadow: var(--shadow-lg), var(--shadow-inner-gold);
   overflow: hidden;
   display: grid;
   grid-template-columns: 340px 1fr;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   position: relative;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 @media (max-width: 768px) {
@@ -2119,6 +2219,112 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   border: 1px solid rgba(212, 175, 55, 0.3);
 }
 
+/* Auspicious Ceremony Timeline Grid (Baraat, Dinner, Varmala, Vidai) */
+.ceremony-schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  margin: 1.2rem 0 1.5rem;
+}
+
+@media (max-width: 620px) {
+  .ceremony-schedule-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.schedule-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: rgba(18, 3, 7, 0.78);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+.schedule-pill:hover {
+  border-color: var(--gold-primary);
+  transform: translateY(-2px);
+  background: rgba(32, 6, 14, 0.9);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+.schedule-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.schedule-title {
+  font-family: var(--font-hindi);
+  font-size: 1rem;
+  color: var(--gold-light);
+  line-height: 1.2;
+}
+
+.schedule-time {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+  margin-top: 3px;
+}
+
+.event-venue-sub {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  font-family: var(--font-sans);
+  line-height: 1.4;
+}
+
+/* Person Card Lineage Additions */
+.person-grandparents {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.person-origin {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-top: 0.55rem;
+  background: rgba(133, 28, 49, 0.45);
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+/* Family Residence Badge */
+.family-residence-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 1.8rem auto 0;
+  padding: 8px 20px;
+  background: rgba(18, 3, 7, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-radius: var(--radius-full);
+  color: var(--gold-light);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
 .event-actions {
   display: flex;
   flex-wrap: wrap;
@@ -2185,12 +2391,12 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
 .family-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  border: 1.5px solid var(--gold-primary);
+  border: 1px solid var(--gold-primary);
   box-shadow: var(--shadow-lg), var(--shadow-inner-gold);
   padding: 3.2rem 2.2rem;
   text-align: center;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* Real Family Photo Banners */
@@ -2278,7 +2484,7 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   background: linear-gradient(135deg, rgba(86, 12, 27, 0.8), rgba(45, 6, 14, 0.9));
   border-radius: var(--radius-md);
   padding: 1.8rem;
-  border: 1.5px dashed var(--gold-primary);
+  border: 1px solid var(--gold-primary);
   max-width: 620px;
   margin: 2.2rem auto;
   position: relative;
@@ -2348,6 +2554,20 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   line-height: 1.6;
 }
 
+.cordial-names a.phone-link {
+  color: var(--gold-light);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(212, 175, 55, 0.45);
+  transition: all 0.25s ease;
+  padding: 0 2px;
+}
+
+.cordial-names a.phone-link:hover {
+  color: var(--gold-lighter);
+  border-bottom-color: var(--gold-primary);
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+}
+
 /* ==========================================================================
    6. INTERACTIVE RSVP & SHUBH-KAMNAYEIN (BLESSINGS WALL)
    ========================================================================== */
@@ -2370,11 +2590,11 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
 .rsvp-form-card, .blessings-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  border: 1.5px solid var(--gold-primary);
+  border: 1px solid var(--gold-primary);
   box-shadow: var(--shadow-lg), var(--shadow-inner-gold);
   padding: 2.4rem 2rem;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .form-group {
@@ -2579,13 +2799,13 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
 .share-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  border: 1.5px solid var(--gold-primary);
+  border: 1px solid var(--gold-primary);
   padding: 2.8rem 1.8rem;
   max-width: 680px;
   margin: 0 auto;
   box-shadow: var(--shadow-lg), var(--shadow-inner-gold);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .btn-whatsapp-share {
@@ -2752,21 +2972,668 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   transform: translateY(0) scale(1);
 }
 
-@media (max-width: 768px) {
-  .foliage-column { width: 54%; }
-  .foliage-leaf-wrap { width: clamp(200px, 50vw, 360px); height: clamp(260px, 60vw, 460px); }
-  .leaf-left-2, .leaf-right-2 { width: clamp(210px, 52vw, 380px); height: clamp(250px, 55vw, 440px); }
-  .ganesha-image-wrapper { width: 195px; height: 195px; }
-  .ganesha-halo-glow { width: 270px; height: 270px; }
+/* ==========================================================================
+   COMPREHENSIVE MOBILE OPTIMIZATIONS (FLUID 360px - 600px PHONES)
+   Guarantees zero overflow, equal card margins, balanced typography & smooth touch
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  /* Layout & Main Container */
+  .invitation-container {
+    padding: 0 0.85rem 4.5rem !important;
+  }
+
+  .hero-section {
+    padding-top: 1.2rem;
+    padding-bottom: 2.2rem;
+  }
+
+  /* Section Titles & Tags */
+  .section-tag {
+    font-size: 0.72rem;
+    padding: 5px 16px;
+    letter-spacing: 1.2px;
+    margin-bottom: 0.35rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.45rem, 5.8vw, 1.75rem);
+    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+  }
+
+  .ornament-divider {
+    margin: 1rem auto 1.8rem;
+  }
+
+  /* Toran Floral Arch */
+  .royal-toran-banner {
+    margin-bottom: 1.2rem;
+  }
+
+  .flower-chain {
+    font-size: 1.15rem;
+  }
+
+  .chain-1, .chain-7 {
+    font-size: 1.35rem;
+  }
+
+  .chain-4 {
+    font-size: 1.35rem;
+  }
+
+  .chain-3, .chain-5 {
+    font-size: 1.05rem;
+  }
+
+  /* 1. Ganesha Temple Card */
+  .ganesha-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 2.2rem 1rem 1.8rem !important;
+    border-radius: 90px 90px 16px 16px !important;
+    margin-bottom: 2.2rem !important;
+  }
+
+  .ganesha-card::before {
+    border-radius: 84px 84px 12px 12px !important;
+    inset: 5px !important;
+  }
+
+  .temple-kalash-crest {
+    padding: 5px 18px;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .crest-symbol {
+    font-size: 1.1rem;
+  }
+
+  .crest-kalash {
+    font-size: 1.45rem;
+  }
+
+  .ganesha-stage-wrap {
+    margin-bottom: 1.4rem;
+  }
+
+  .ganesha-image-wrapper {
+    width: 180px;
+    height: 180px;
+    padding: 8px;
+  }
+
+  .ganesha-halo-glow {
+    width: 250px;
+    height: 250px;
+  }
+
   .ganesha-full-bg-img {
     filter: blur(3px) brightness(0.38) saturate(1.4) contrast(1.15) sepia(0.1);
   }
+
+  .shloka-heading {
+    font-size: clamp(1.35rem, 5.2vw, 1.7rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .shloka-main {
+    font-size: clamp(1.02rem, 4vw, 1.22rem);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+
+  .ganesha-blessing-badges {
+    gap: 0.55rem;
+    margin: 0.5rem auto 1.1rem auto;
+  }
+
+  .blessing-badge {
+    font-size: 0.74rem;
+    padding: 5px 12px;
+  }
+
+  .shloka-meaning {
+    font-size: clamp(0.92rem, 3.6vw, 1.05rem);
+    line-height: 1.6;
+    padding: 0 0.3rem;
+  }
+
+  /* 2. Wedding Announcement & Couple */
+  .wedding-announcement {
+    padding: 2.2rem 1rem 1.8rem !important;
+    margin-bottom: 2.2rem !important;
+  }
+
+  .announcement-crown-badge {
+    font-size: 0.92rem;
+    padding: 6px 18px;
+    margin-bottom: 1rem;
+  }
+
+  .wedding-invitation-lead {
+    font-size: clamp(0.92rem, 3.5vw, 1.12rem);
+    letter-spacing: 1px;
+    margin-bottom: 0.35rem;
+    padding: 0 0.2rem;
+  }
+
+  .wedding-tagline {
+    font-size: clamp(1.75rem, 6.8vw, 2.35rem);
+    margin-bottom: 1.4rem;
+    word-spacing: 0.25em;
+  }
+
+  .wedding-tagline .tagline-amp {
+    margin: 0 0.55rem;
+  }
+
+  .couple-showcase {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .couple-person-card {
+    padding: 1.8rem 1rem 1.4rem !important;
+    border-radius: 90px 90px 16px 16px !important;
+  }
+
+  .couple-person-card::before {
+    border-radius: 84px 84px 12px 12px !important;
+    inset: 5px !important;
+  }
+
+  .person-role {
+    font-size: 0.68rem;
+    padding: 4px 14px;
+    margin-bottom: 0.6rem;
+  }
+
+  .person-name {
+    font-size: clamp(1.55rem, 5.5vw, 1.95rem);
+    margin-bottom: 0.35rem;
+  }
+
+  .person-lineage {
+    font-size: 1.02rem;
+  }
+
+  .person-grandparents {
+    font-size: 0.88rem;
+    margin-top: 0.25rem;
+  }
+
+  .person-origin {
+    font-size: 0.72rem;
+    padding: 3px 11px;
+    margin-top: 0.45rem;
+  }
+
+  .couple-ampersand {
+    margin: 0.35rem 0;
+  }
+
+  .ampersand-circle {
+    width: 52px;
+    height: 52px;
+    font-size: 1.85rem;
+  }
+
+  .ampersand-hindi {
+    font-size: 0.82rem;
+    margin-top: 3px;
+  }
+
+  .couple-hero-banner {
+    height: clamp(210px, 58vw, 310px);
+    margin: 0 auto 1.6rem;
+  }
+
+  .couple-hero-quote {
+    font-size: 1rem;
+    bottom: 12px;
+    left: 10px;
+    right: 10px;
+  }
+
+  /* 3. Photo Collage */
+  .royal-collage-section {
+    margin: 2.5rem 0 3rem;
+  }
+
+  .collage-subtitle {
+    font-size: 1.05rem;
+    padding: 0 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .royal-collage-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+    margin-top: 1.2rem;
+  }
+
+  .royal-collage-grid > .collage-item:nth-child(1),
+  .royal-collage-grid > .collage-hero-throne {
+    grid-column: 1 / -1 !important;
+    height: 245px;
+  }
+
+  .royal-collage-grid > .collage-item:nth-child(2),
+  .royal-collage-grid > .collage-item:nth-child(3),
+  .royal-collage-grid > .collage-item:nth-child(4) {
+    grid-column: 1 / -1 !important;
+    height: clamp(290px, 80vw, 360px);
+  }
+
+  .collage-info-ribbon {
+    padding: 1.8rem 1rem 0.8rem;
+  }
+
+  .collage-hindi-title {
+    font-size: 1.1rem;
+  }
+
+  .collage-eng-desc {
+    font-size: 0.88rem;
+  }
+
+  /* Lightbox */
+  .royal-lightbox {
+    padding: 0.8rem;
+  }
+
+  .lightbox-close-btn {
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    z-index: 10;
+  }
+
+  .lightbox-frame img {
+    max-height: 60vh;
+  }
+
+  .lightbox-caption {
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+  }
+
+  /* 4. Countdown Timer */
+  .countdown-section {
+    margin-bottom: 2.8rem;
+  }
+
+  .countdown-box {
+    padding: 1.8rem 0.75rem 1.6rem !important;
+  }
+
+  .countdown-date-badge {
+    font-size: clamp(0.7rem, 2.7vw, 0.82rem);
+    letter-spacing: 0.8px;
+    padding: 6px 14px;
+    margin: 0 auto 1.4rem auto;
+    border-radius: var(--radius-md);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .countdown-grid {
+    gap: 0.45rem;
+  }
+
+  .countdown-item {
+    padding: 0.85rem 0.2rem;
+  }
+
+  .countdown-number {
+    font-size: clamp(1.35rem, 5.2vw, 1.75rem);
+    margin-bottom: 0.15rem;
+  }
+
+  .countdown-label {
+    font-size: clamp(0.55rem, 2.1vw, 0.66rem);
+    letter-spacing: 0.8px;
+  }
+
+  /* 5. Events / Itinerary */
+  .events-section {
+    margin-bottom: 3rem;
+  }
+
+  .events-list {
+    gap: 1.8rem;
+  }
+
+  .event-card {
+    grid-template-columns: 1fr;
+  }
+
+  .event-media-container {
+    height: 215px;
+    min-height: 190px;
+  }
+
+  .event-badge-tag {
+    top: 12px;
+    left: 12px;
+    font-size: 0.68rem;
+    padding: 4px 12px;
+  }
+
+  .event-content {
+    padding: 1.5rem 1rem 1.2rem !important;
+  }
+
+  .event-hindi-name {
+    font-size: 1.15rem;
+  }
+
+  .event-title {
+    font-size: clamp(1.35rem, 5vw, 1.6rem);
+    margin-bottom: 0.45rem;
+  }
+
+  .event-desc {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .event-meta-grid {
+    grid-template-columns: 1fr;
+    margin: 1rem 0;
+    padding: 0.85rem;
+    gap: 0.75rem;
+  }
+
+  .event-meta-item {
+    gap: 0.65rem;
+  }
+
+  .meta-icon {
+    font-size: 1.15rem;
+  }
+
+  .meta-text-title {
+    font-size: 0.66rem;
+  }
+
+  .meta-text-val {
+    font-size: 0.98rem;
+  }
+
+  .event-dress-code {
+    font-size: 0.76rem;
+    padding: 4px 12px;
+    margin-bottom: 1.2rem;
+  }
+
+  .ceremony-schedule-grid {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    margin: 1rem 0 1.2rem;
+  }
+
+  .schedule-pill {
+    padding: 0.65rem 0.85rem;
+    gap: 0.75rem;
+  }
+
+  .schedule-icon {
+    font-size: 1.3rem;
+  }
+
+  .schedule-title {
+    font-size: 0.92rem;
+    line-height: 1.25;
+  }
+
+  .schedule-time {
+    font-size: 0.8rem;
+    margin-top: 2px;
+  }
+
+  .event-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.65rem;
+  }
+
+  .btn-royal-outline,
+  .btn-royal-solid {
+    width: 100%;
+    justify-content: center;
+    padding: 11px 16px;
+    font-size: 0.82rem;
+  }
+
+  /* 6. Parivaar Section */
+  .family-section {
+    margin-bottom: 3rem;
+  }
+
+  .family-card {
+    padding: 2.2rem 1rem 1.8rem !important;
+  }
+
+  .family-photos-grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+    margin: 1.4rem 0 2rem;
+  }
+
+  .family-photo-card {
+    height: 220px;
+  }
+
+  .family-photo-caption {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+  }
+
+  .family-blessings-block {
+    margin-bottom: 1.8rem;
+  }
+
+  .family-lead-text {
+    font-size: 1.05rem;
+  }
+
+  .grandparents-names {
+    font-size: clamp(1.2rem, 4.2vw, 1.45rem);
+    margin-bottom: 1.4rem;
+  }
+
+  .parents-names {
+    font-size: clamp(1.3rem, 4.8vw, 1.6rem);
+  }
+
+  .kids-invite-banner {
+    padding: 1.4rem 0.85rem 1.1rem;
+    margin: 1.8rem auto;
+  }
+
+  .kids-quote {
+    font-size: clamp(1.15rem, 4.2vw, 1.35rem);
+    line-height: 1.5;
+  }
+
+  .kids-names {
+    font-size: 1rem;
+  }
+
+  .family-cordial-grid {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+    margin-top: 1.6rem;
+  }
+
+  .cordial-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .cordial-names {
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .family-residence-badge {
+    font-size: 0.76rem;
+    padding: 7px 14px;
+    width: 100%;
+    border-radius: var(--radius-md);
+    margin-top: 1.4rem;
+  }
+
+  /* 7. RSVP & Blessings */
+  .rsvp-section {
+    margin-bottom: 3rem;
+  }
+
+  .rsvp-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .rsvp-form-card,
+  .blessings-card {
+    padding: 1.8rem 1rem 1.4rem !important;
+  }
+
+  .form-group {
+    margin-bottom: 1.1rem;
+  }
+
+  .form-label {
+    font-size: 0.72rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+  .btn-submit-rsvp {
+    padding: 12px;
+    font-size: 0.82rem;
+    letter-spacing: 1.5px;
+  }
+
+  .blessings-wall-heading {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .blessings-wall-title {
+    font-size: 1.15rem;
+  }
+
+  .blessing-item {
+    padding: 0.95rem 1rem;
+  }
+
+  .blessing-sender {
+    font-size: 1.05rem;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .blessing-message {
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+
+  /* 8. Share Card */
+  .share-section {
+    margin-bottom: 3rem;
+  }
+
+  .share-card {
+    padding: 2rem 1rem !important;
+  }
+
+  .share-card-title {
+    font-size: 1.25rem;
+  }
+
+  .btn-whatsapp-share {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* 9. Personalization Drawer */
+  .customizer-drawer {
+    width: 100vw;
+    max-width: 100vw;
+    right: -100vw;
+  }
+
+  .drawer-header {
+    padding: 1.2rem;
+  }
+
+  .drawer-content {
+    padding: 1.2rem;
+  }
+
+  .drawer-footer {
+    padding: 0.85rem 1.2rem;
+  }
 }
 
-@media (max-width: 480px) {
-  .foliage-column { width: 54%; }
-  .foliage-leaf-wrap { width: clamp(180px, 55vw, 320px); height: clamp(230px, 65vw, 400px); }
-  .leaf-left-2, .leaf-right-2 { width: clamp(190px, 56vw, 340px); height: clamp(220px, 60vw, 380px); }
+@media (max-width: 380px) {
+  .invitation-container {
+    padding: 0 0.6rem 3.5rem !important;
+  }
+
+  .countdown-grid {
+    gap: 0.35rem;
+  }
+
+  .countdown-item {
+    padding: 0.75rem 0.15rem;
+  }
+
+  .countdown-number {
+    font-size: 1.35rem;
+  }
+
+  .countdown-label {
+    font-size: 0.52rem;
+    letter-spacing: 0.5px;
+  }
+
+  .wedding-tagline {
+    font-size: 1.7rem;
+  }
+
+  .person-name {
+    font-size: 1.5rem;
+  }
+
+  .floating-controls {
+    bottom: max(12px, env(safe-area-inset-bottom, 12px));
+    right: max(10px, env(safe-area-inset-right, 10px));
+    gap: 6px;
+  }
+
+  .float-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
 }
 
 /* ==========================================================================
@@ -2806,39 +3673,33 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   overflow: hidden;
 }
 
-/* Individual word reveal */
+/* Individual word reveal (Crystal Clear) */
 .text-reveal-word {
   display: inline-block;
   opacity: 0;
   transform: translateY(110%) rotateX(-40deg);
-  filter: blur(6px);
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.6s ease;
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .text-reveal-wrap.is-revealed .text-reveal-word {
   opacity: 1;
   transform: translateY(0) rotateX(0deg);
-  filter: blur(0);
 }
 
 /* Stagger delays for each word (set via JS inline style) */
 
-/* Golden shimmer text reveal (for names) */
+/* Golden shimmer text reveal for names (Crystal Clear) */
 .name-reveal {
   opacity: 0;
-  transform: translateY(40px) scale(0.92);
-  filter: blur(8px);
+  transform: translateY(30px) scale(0.96);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.7s ease;
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .name-reveal.is-revealed {
   opacity: 1;
   transform: translateY(0) scale(1);
-  filter: blur(0);
 }
 
 /* Golden underline reveal (draws in from center) */
@@ -2887,20 +3748,17 @@ body:has(.invitation-container.website-revealed) .floating-customizer-btn {
   letter-spacing: 1.5px;
 }
 
-/* Elegant fade-slide-up reveal for paragraphs */
+/* Elegant fade-slide-up reveal for paragraphs (Crystal Clear) */
 .slide-reveal {
   opacity: 0;
-  transform: translateY(32px);
-  filter: blur(3px);
+  transform: translateY(24px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.6s ease;
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .slide-reveal.is-revealed {
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0);
 }
 
 /* Ampersand circle pop animation */
