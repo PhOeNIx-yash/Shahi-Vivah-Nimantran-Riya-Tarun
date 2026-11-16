@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     groomFullName: "CA Tarun Goyal",
     groomLineage: "Son of Smt. Meenakshi Goyal & Shri Rajinder Goyal",
     weddingDate: "2026-12-04T20:00:00",
-    grandparentsText: "Smt. Kamla Devi & Lt. Indersen Garg",
+    grandparentsText: "Smt. Kamla Devi & Late Shri Indersen Garg",
     parentsText: "Smt. Seema Garg & Shri Manoj Garg",
     kidsQuote: "“Mere pyare Bua ji ki shaadi mein Jalool-Jalool aana!”",
     kidsNames: "— Lots of love from Aarav, Vihaan & Pari",
