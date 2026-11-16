@@ -451,7 +451,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 5. WhatsApp Share Formatting
   // =========================================================================
   function buildWhatsAppMessage() {
-    const inviteUrl = window.location.href.split('#')[0];
+    let inviteUrl = window.location.href.split('#')[0];
+    if (inviteUrl.startsWith('file:') || inviteUrl.includes('localhost') || inviteUrl.includes('127.0.0.1')) {
+      inviteUrl = 'https://phoenix-yash.github.io/Shahi-Vivah-Nimantran-Riya-Tarun/';
+    }
     const bride = weddingData.brideFullName || "CA Riya Garg";
     const groom = weddingData.groomFullName || "CA Tarun Goyal";
     const shareDate = new Date(weddingData.weddingDate).toLocaleDateString('en-US', {
