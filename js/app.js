@@ -463,7 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     return `✨ *|| श्री गणेशाय नमः ||* ✨\n` +
       `🌸 *SHUBH VIVAH NIMANTRAN* 🌸\n\n` +
-      `We cordially invite you with family to celebrate the royal wedding ceremonies of:\n` +
+      `We cordially invite you to celebrate the royal wedding ceremonies of:\n` +
       `💍 *${bride}* & *${groom}*\n\n` +
       `━━━━━━━━━━━━━━━━━━━━\n` +
       `💌 *TOUCH TO OPEN DIGITAL INVITATION:*\n` +
