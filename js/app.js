@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function toTitleCase(str) {
     if (!str) return "";
     return str.trim().split(/\s+/).map(word => {
+      if (word.toUpperCase() === 'CA') return 'CA';
       if (word.length > 1 && word === word.toUpperCase()) {
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
       }
@@ -35,20 +36,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }).join(' ');
   }
 
-  // Default Wedding Data Model (Riya & Tarun)
+  // Default Wedding Data Model (CA Riya & CA Tarun)
   const defaultWeddingData = {
-    brideName: "Riya",
-    brideFullName: document.getElementById('brideNameDisplay')?.textContent.trim() || "Riya Garg",
+    brideName: "CA Riya",
+    brideFullName: "CA Riya Garg",
     brideLineage: "Daughter of Smt. Seema Garg & Shri Manoj Garg",
-    groomName: "Tarun",
-    groomFullName: document.getElementById('groomNameDisplay')?.textContent.trim() || "Tarun Goyal",
+    groomName: "CA Tarun",
+    groomFullName: "CA Tarun Goyal",
     groomLineage: "Son of Smt. Meenakshi Goyal & Shri Rajinder Goyal",
     weddingDate: "2026-12-04T20:00:00",
-    grandparentsText: document.getElementById('grandparentsDisplay')?.textContent.trim() || "Smt. Kamla Devi & Late Shri Indersen Garg",
-    parentsText: document.getElementById('parentsDisplay')?.textContent.trim() || "Smt. Seema Garg & Shri Manoj Garg",
+    grandparentsText: "Smt. Kamla Devi & Lt. Indersen Garg",
+    parentsText: "Smt. Seema Garg & Shri Manoj Garg",
     kidsQuote: "“Mere pyare Bua ji ki shaadi mein Jalool-Jalool aana!”",
     kidsNames: "— Lots of love from Aarav, Vihaan & Pari",
-    venueName: "Miraya Crown Hotel & Banquets",
+    venueName: "CELESTE HALL, Miraya Crown Hotel & Banquets",
     venueCity: "PKS Town Central, Ek Murti Chowk, Sector-16B, Greater Noida West",
     customMusicUrl: ""
   };
@@ -77,16 +78,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const formattedDay = weddingDate.toLocaleDateString('en-US', { weekday: 'long' });
 
     // Envelope Initials & Names
-    const initials = `${bride.charAt(0)} & ${groom.charAt(0)}`;
+    const cleanBride = bride.replace(/^CA\s+/i, '');
+    const cleanGroom = groom.replace(/^CA\s+/i, '');
+    const initials = `${cleanBride.charAt(0)} & ${cleanGroom.charAt(0)}`;
     const initialsEl = document.getElementById('envelopeInitials');
     if (initialsEl) initialsEl.textContent = initials;
 
     const envCouple = document.getElementById('envelopeCouple');
     if (envCouple) envCouple.textContent = `${bride} & ${groom}`;
     const envelopeDateEl = document.getElementById('envelopeDateDisplay');
-    if (envelopeDateEl) envelopeDateEl.textContent = `${formattedDate} • ${weddingData.venueName}, ${weddingData.venueCity}`;
+    if (envelopeDateEl) envelopeDateEl.textContent = `${formattedDate} • CELESTE HALL, Greater Noida West`;
     const weddingDateEl = document.getElementById('weddingDateDisplay');
-    if (weddingDateEl) weddingDateEl.textContent = `${formattedDay}, ${formattedDate} • ${weddingData.venueCity}`;
+    if (weddingDateEl) weddingDateEl.textContent = `${formattedDay}, ${formattedDate} • CELESTE HALL, Greater Noida West`;
 
     // Main Names
     const bNameEl = document.getElementById('brideNameDisplay');
@@ -152,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     envelopeWrapper.classList.remove('open-anim');
   }
   if (openInviteBtn) {
-    openInviteBtn.innerHTML = '<span>Tap to Open Shahi Nimantran</span> <span>🪷</span>';
+    openInviteBtn.innerHTML = '<span>Tap to Open Shubh Nimantran</span> <span>🪷</span>';
     openInviteBtn.style.opacity = '';
     openInviteBtn.style.visibility = '';
     openInviteBtn.style.pointerEvents = '';
@@ -447,25 +450,90 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // 5. WhatsApp Share Formatting
   // =========================================================================
-  function updateWhatsAppShareLink() {
-    const shareBtn = document.getElementById('whatsappShareBtn');
-    if (!shareBtn) return;
-
+  function buildWhatsAppMessage() {
+    const inviteUrl = window.location.href.split('#')[0];
+    const bride = weddingData.brideFullName || "CA Riya Garg";
+    const groom = weddingData.groomFullName || "CA Tarun Goyal";
     const shareDate = new Date(weddingData.weddingDate).toLocaleDateString('en-US', {
+      weekday: 'long',
       day: 'numeric',
       month: 'long',
       year: 'numeric'
     });
 
-    const message = `✨ *|| श्री गणेशाय नमः ||* ✨\n\n` +
-      `We cordially invite you and your family to celebrate the auspicious wedding ceremonies of bride *${weddingData.brideName}* with groom *${weddingData.groomName}*! 🪷\n\n` +
-      `📅 *Date:* ${shareDate}\n` +
-      `📍 *Venue:* ${weddingData.venueName}, ${weddingData.venueCity}\n\n` +
-      `Kindly view the complete interactive digital royal invitation with event itinerary, muhurat & timings here:\n${window.location.href}\n\n` +
-      `_With warm regards & blessings,_\n*Garg & Goyal Family*`;
+    return `✨ *|| श्री गणेशाय नमः ||* ✨\n` +
+      `🌸 *SHUBH VIVAH NIMANTRAN* 🌸\n\n` +
+      `We cordially invite you with family to celebrate the royal wedding ceremonies of:\n` +
+      `💍 *${bride}* & *${groom}*\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━\n` +
+      `💌 *TOUCH TO OPEN DIGITAL INVITATION:*\n` +
+      `👉 ${inviteUrl} 👈\n` +
+      `━━━━━━━━━━━━━━━━━━━━\n\n` +
+      `🗓️ *Auspicious Date:* ${shareDate}\n` +
+      `📍 *Venue:* ${weddingData.venueName}, ${weddingData.venueCity}\n` +
+      `🥁 *Program:* Baraat: 8:00 PM | Varmala: 9:00 PM | Dinner: 8:00 PM Onwards\n\n` +
+      `✨ _Please tap the blue link above to open our interactive 3D royal invitation card with auspicious Shehnai music, event itinerary & map location._ 🪷\n\n` +
+      `_With warm regards & blessings,_\n` +
+      `*Garg & Goyal Family*`;
+  }
 
-    const encoded = encodeURIComponent(message);
-    shareBtn.href = `https://api.whatsapp.com/send?text=${encoded}`;
+  function updateWhatsAppShareLink() {
+    const floatShareBtn = document.getElementById('floatingShareBtn');
+    if (floatShareBtn && !floatShareBtn.dataset.listenerAttached) {
+      floatShareBtn.dataset.listenerAttached = "true";
+      floatShareBtn.addEventListener('click', () => {
+        const fullMessage = buildWhatsAppMessage();
+        const encoded = encodeURIComponent(fullMessage);
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encoded}`;
+        window.open(whatsappUrl, '_blank');
+      });
+    }
+
+    const shareBtn = document.getElementById('whatsappShareBtn');
+    const copyBtn = document.getElementById('copyShareBtn');
+    if (!shareBtn && !copyBtn) return;
+
+    const copyText = document.getElementById('copyShareBtnText');
+    const copyToast = document.getElementById('copyToastMsg');
+
+    const message = buildWhatsAppMessage();
+
+    if (shareBtn) {
+      const encoded = encodeURIComponent(message);
+      shareBtn.href = `https://api.whatsapp.com/send?text=${encoded}`;
+    }
+
+    if (copyBtn && !copyBtn.dataset.listenerAttached) {
+      copyBtn.dataset.listenerAttached = "true";
+      copyBtn.addEventListener('click', async () => {
+        const fullMessage = buildWhatsAppMessage();
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(fullMessage);
+          } else {
+            const tempTa = document.createElement('textarea');
+            tempTa.value = fullMessage;
+            tempTa.style.position = 'fixed';
+            tempTa.style.opacity = '0';
+            document.body.appendChild(tempTa);
+            tempTa.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTa);
+          }
+          if (copyText) copyText.textContent = "✅ Copied to Clipboard!";
+          if (copyToast) {
+            copyToast.style.display = "block";
+            setTimeout(() => {
+              copyToast.style.display = "none";
+              if (copyText) copyText.textContent = "Copy Invitation Text & Link";
+            }, 3000);
+          }
+        } catch (err) {
+          console.error("Clipboard copy failed:", err);
+          alert("Message copied! You can now paste and share on WhatsApp.");
+        }
+      });
+    }
   }
 
   // =========================================================================
@@ -478,7 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       name: "Ramesh Uncle & Family",
       side: "Ladkiwale",
-      wishes: `Wishing dear ${weddingData.brideName || 'Riya'} and ${weddingData.groomName || 'Tarun'} a lifetime of happiness, unconditional love, and endless smiles! May God bless you both always.`
+      wishes: `Wishing dear ${weddingData.brideName || 'CA Riya'} and ${weddingData.groomName || 'CA Tarun'} a lifetime of happiness, unconditional love, and endless smiles! May God bless you both always.`
     },
     {
       name: "Sneha & Amit Kapoor",
