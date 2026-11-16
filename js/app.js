@@ -474,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `🥁 *Program:* Baraat: 8:00 PM | Varmala: 9:00 PM | Dinner: 8:00 PM Onwards\n\n` +
       `✨ _Please tap the blue link above to open our interactive 3D royal invitation card with auspicious Shehnai music, event itinerary & map location._ 🪷\n\n` +
       `_With warm regards & blessings,_\n` +
-      `*Garg & Goyal Family*`;
+      `*Garg Family*`;
   }
 
   function updateWhatsAppShareLink() {
